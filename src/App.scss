@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/bootstrap";
+
+* {
+	font-family: "Open Sans", sans-serif;
+	box-sizing: border-box !important;
+
+	a {
+		text-decoration: none !important;
+		color: #000 !important;
+
+		&:hover {
+			color: #777 !important;
+		}
+	}
+}
