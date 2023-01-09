@@ -2,7 +2,6 @@
 import { CartDropdownContainer, CartItems, Btn } from "./cart-dropdown.styles";
 
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import { CartContext } from "../../contexts/cart.context";
 
 import CartItem from "../cart-item/cart-item";
