@@ -11,7 +11,7 @@ import { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
 
 const CartItem = ({ onClick, children, cartItem }) => {
-	const { id, name, imageUrl, price, quantity } = cartItem,
+	const { name, imageUrl, price, quantity } = cartItem,
 		{ addItemToCart, subtractItemFromCart, deleteFromCart } = useContext(CartContext);
 	return (
 		<CartItemContainer onClick={onClick}>

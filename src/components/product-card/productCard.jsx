@@ -1,4 +1,4 @@
-import { Img, ProductCardContainer, ProductCardFooter, ProductName } from "./productCard.styles.jsx";
+import { Img, ProductCardContainer, ProductCardFooter } from "./productCard.styles.jsx";
 
 import { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";

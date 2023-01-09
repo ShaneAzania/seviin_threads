@@ -1,6 +1,6 @@
 import { LogoContainer, Navigation, NavLinks, NavLinksContainer } from "./nav.styles.jsx";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Fragment } from "react";
 
 import { signOutUser /*, getUserDisplayNameFromeFireStore */ } from "../../utils/firebase/firebase.utils";
