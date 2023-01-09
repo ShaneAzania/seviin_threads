@@ -19,7 +19,7 @@ function ProductCard({ product }) {
 				<span>${price}</span>
 			</ProductCardFooter>
 			<button className="btn btn-outline-light rounded-0 text-center " onClick={addToCartHandler}>
-				Add to card
+				Add to cart
 			</button>
 		</ProductCardContainer>
 	);
