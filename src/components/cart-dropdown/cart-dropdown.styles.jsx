@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { Link } from "react-router-dom";
+
 export const CartDropdownContainer = styled.div`
 	position: absolute;
 	width: 340px;
@@ -26,6 +28,10 @@ export const CartItems = styled.div`
 	overflow: scroll;
 `;
 
-export const Btn = styled.div`
-	margin-top: auto;
+export const Btn = styled(Link)`
+	color: #fff !important;
+
+	&:hover {
+		color: #fff !important;
+	}
 `;

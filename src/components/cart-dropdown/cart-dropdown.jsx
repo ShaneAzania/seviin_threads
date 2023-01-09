@@ -1,5 +1,5 @@
 // import "./cart-dropdown-styles";
-import { CartDropdownContainer, CartItems } from "./cart-dropdown.styles";
+import { CartDropdownContainer, CartItems, Btn } from "./cart-dropdown.styles";
 
 import { useContext } from "react";
 import { Link } from "react-router-dom";
@@ -16,9 +16,13 @@ const CartDropdown = () => {
 					<CartItem key={item.id} cartItem={item}></CartItem>
 				))}
 			</CartItems>
-			<Link className="btn btn-dark rounded-0 mb-2" to="/checkout" onClick={() => set_isCartOpen(false)}>
+			<Btn
+				className="btn btn-dark rounded-0 mb-2"
+				to="/checkout"
+				onClick={() => set_isCartOpen(false)}
+			>
 				Checkout
-			</Link>
+			</Btn>
 			<div>Total: ${cartTotal}</div>
 		</CartDropdownContainer>
 	);
