@@ -1,11 +1,6 @@
-node_modules/.DS_Store
-src/.DS_Store
-src/components/.DS_Store
-
 # OS-specific files
 **/.DS_Store
-.DS_Store
 .Trashes
-src/components/.DS_Store
-src/.DS_Store
-node_modules/.cache/.DS_Store
+
+# in TERMINAL:
+# find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch
