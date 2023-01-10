@@ -1,6 +1,7 @@
-
-.DS_Store
-.DS_Store
 node_modules/.DS_Store
 src/.DS_Store
 src/components/.DS_Store
+
+# OS-specific files
+.DS_Store
+.Trashes
