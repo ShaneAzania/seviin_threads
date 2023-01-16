@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, /*useState,*/ useEffect, useReducer } from "react";
 import {} from "../utils/firebase/firebase.utils";
 
 // the actual value you want to access
@@ -13,12 +13,52 @@ export const CartContext = createContext({
 	cartTotal: null,
 });
 
+// Reducer and action types and iniitial state
+export const CART_ACTION_TYPES = {
+	SET_IS_CART_OPEN: "SET_IS_CART_OPEN",
+	SET_CART_ITEMS: "SET_CART_ITEMS",
+	SET_CART_COUNT: "SET_CART_COUNT",
+	SET_CART_TOTAL: "SET_CART_TOTAL",
+};
+const cartReducer = (state, action) => {
+	const { type, payload } = action;
+
+	switch (type) {
+		case CART_ACTION_TYPES.SET_IS_CART_OPEN:
+			return {
+				...state,
+				isCartOpen: !state.isCartOpen,
+			};
+		case CART_ACTION_TYPES.SET_CART_ITEMS:
+			return {
+				...state,
+				cartItems: payload,
+			};
+		case CART_ACTION_TYPES.SET_CART_COUNT:
+			return {
+				...state,
+				cartCount: payload,
+			};
+		case CART_ACTION_TYPES.SET_CART_TOTAL:
+			return {
+				...state,
+				cartTotal: payload,
+			};
+
+		default:
+			throw new Error(`wrong action type: ${type}`);
+	}
+};
+const INITIAL_STATE = {
+	isCartOpen: false,
+	cartItems: [],
+	cartCount: 0,
+	cartTotal: 0,
+};
+
 // provider is the actual component that gets wrapped around other components to give them acces to the context
 export const CartProvider = ({ children }) => {
-	const [isCartOpen, set_isCartOpen] = useState(false);
-	const [cartItems, set_cartItems] = useState([]);
-	const [cartCount, set_cartCount] = useState(0);
-	const [cartTotal, set_cartTotal] = useState(0);
+	const [{ isCartOpen, cartItems, cartCount, cartTotal }, dispatch] = useReducer(cartReducer, INITIAL_STATE);
 
 	useEffect(() => {
 		var countAccumulator = 0,
@@ -29,10 +69,13 @@ export const CartProvider = ({ children }) => {
 			return 0;
 		});
 
-		set_cartCount(countAccumulator);
-		set_cartTotal(totalAccumulator);
+		dispatch({ type: CART_ACTION_TYPES.SET_CART_COUNT, payload: countAccumulator });
+		dispatch({ type: CART_ACTION_TYPES.SET_CART_TOTAL, payload: totalAccumulator });
 	}, [cartItems]);
 
+	const set_isCartOpen = () => {
+		dispatch({ type: CART_ACTION_TYPES.SET_IS_CART_OPEN });
+	};
 	const addItemToCart = (itemToAdd) => {
 		// If item is already in 'cartItems', increase the quantity value, else add 'itemToAdd'.
 		var updatedCartItemsArray = [];
@@ -53,9 +96,8 @@ export const CartProvider = ({ children }) => {
 			updatedCartItemsArray = [...cartItems, { ...itemToAdd, quantity: 1 }];
 		}
 
-		set_cartItems(updatedCartItemsArray);
+		dispatch({ type: CART_ACTION_TYPES.SET_CART_ITEMS, payload: updatedCartItemsArray });
 	};
-
 	const subtractItemFromCart = (itemToSubtract) => {
 		var updatedCartItemsArray = [];
 
@@ -75,13 +117,13 @@ export const CartProvider = ({ children }) => {
 			// check if quantity reaches 0, don't add to updated cart array)
 			updatedCartItemsArray = updatedCartItemsArray.filter((item) => item.quantity > 0);
 
-			set_cartItems(updatedCartItemsArray);
+			dispatch({ type: CART_ACTION_TYPES.SET_CART_ITEMS, payload: updatedCartItemsArray });
 		}
 	};
-
 	const deleteFromCart = (itemToDelete) => {
 		const updatedCartItemsArray = cartItems.filter((item) => item.id !== itemToDelete.id);
-		set_cartItems(updatedCartItemsArray);
+
+		dispatch({ type: CART_ACTION_TYPES.SET_CART_ITEMS, payload: updatedCartItemsArray });
 	};
 
 	const value = {
