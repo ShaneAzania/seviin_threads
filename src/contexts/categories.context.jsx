@@ -1,4 +1,4 @@
-import { createContext, useEffect, /*useState,*/ useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import {} from "../utils/firebase/firebase.utils";
 
 import { getCategoriesAndDocuments } from "../utils/firebase/firebase.utils";
@@ -44,19 +44,6 @@ const INITIAL_STATE = {
 
 // provider is the actual component that gets wrapped around other components to give them acces to the context
 export const CategoriesProvider = ({ children }) => {
-	// 	const [categories, set_categories] = useState([
-	// 		{
-	// 			title: "",
-	// 			items: [
-	// 				{
-	// 					id: 0,
-	// 					name: "",
-	// 					imageUrl: "",
-	// 					price: 0,
-	// 				},
-	// 			],
-	// 		},
-	// 	]);
 	const [{ categories }, dispatch] = useReducer(categoriesReducer, INITIAL_STATE);
 
 	const set_categories = (categoriesToSet) => {

@@ -1,4 +1,4 @@
-import { createContext, /*useState,*/ useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { onAuthStateChangedListener, getUserDisplayNameFromeFireStore } from "../utils/firebase/firebase.utils";
 
 // the actual value you want to access
@@ -28,7 +28,6 @@ const INITIAL_STATE = { currenntUser: null };
 
 // provider is the actual component that gets wrapped around other components to give them acces to the context
 export const UserProvider = ({ children }) => {
-	// const [currenntUser, setCurrenntUser] = useState(null);
 	const [{ currenntUser }, dispatch] = useReducer(userReducer, INITIAL_STATE);
 
 	const setCurrenntUser = (userToSet) => {
@@ -44,24 +43,12 @@ export const UserProvider = ({ children }) => {
 
 			try {
 				userAuthWithDisplayName = await getUserDisplayNameFromeFireStore(user);
-				// console.log(
-				// 	"userContext: onAuthStateChangedListener: try: userAuthWithDisplayName:",
-				// 	userAuthWithDisplayName
-				// );
-			} catch (error) {
-				// console.log("userContext: onAuthStateChangedListener: catch: user:", user);
-				// console.log("userContext:", error);
-			}
+			} catch (error) {}
 
 			//set current user
 			if (user && userAuthWithDisplayName) {
-				// console.log(
-				// 	"userContext: onAuthStateChangedListener: if/else: userAuthWithDisplayName:",
-				// 	userAuthWithDisplayName
-				// );
 				setCurrenntUser(userAuthWithDisplayName);
 			} else if (user && !userAuthWithDisplayName) {
-				// console.log("userContext: onAuthStateChangedListener: if/else: user:", user);
 				setCurrenntUser(user);
 			} else {
 				setCurrenntUser(null);
