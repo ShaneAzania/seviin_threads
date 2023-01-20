@@ -2,5 +2,19 @@
 **/.DS_Store
 .Trashes
 
-# in TERMINAL:
+# in TERMINAL TO GET RID OF .DS_Store:
 # find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch
+
+
+# production 
+/build
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
