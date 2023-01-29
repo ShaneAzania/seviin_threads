@@ -15,6 +15,13 @@
 .env.production.local
 
 # dependencies
-/node_modules
+node_modules
+node_modules/**
+**/node_modules
+**/node_modules/**
 /.pnp
 .pnp.js
+*.pack
+*.pack
+node_modules/.cache/.eslintcache
+*.pack

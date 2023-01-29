@@ -1,11 +1,26 @@
+// css
 import "./App.scss";
 import "bootstrap";
+
+// fire base
+import { onAuthStateChangedListener, getUserDisplayNameFromeFireStore } from "./utils/firebase/firebase.utils";
+
+// react
+import { Routes, Route /*, useLocation*/ } from "react-router-dom";
+import { useEffect } from "react";
+// redux
+import { useDispatch } from "react-redux";
+//redux actions
+import { setCurrenntUser } from "./redux-store/user/user.action";
+
+// componenets
 import Nav from "./components/nav/nav";
+
+// routes
 import Home from "./routes/home/home.route";
 import Shop from "./routes/shop/shop.route";
 import SignInUp from "./routes/sign-in-up/sign-in-up.route";
 import Checkout from "./routes/checkout/checkout.route";
-import { Routes, Route /*, useLocation*/ } from "react-router-dom";
 
 function App() {
 	// console.log("Current URL:".toUpperCase(), useLocation());
@@ -28,6 +43,31 @@ function App() {
 			to: "#",
 		},
 	];
+
+	//redux dispatch
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const unsubscribe = onAuthStateChangedListener(async (user) => {
+			//try to get display name into current user before setCurrentUser
+			var userAuthWithDisplayName = null;
+
+			try {
+				userAuthWithDisplayName = await getUserDisplayNameFromeFireStore(user);
+			} catch (error) {}
+
+			//set current user
+			if (user && userAuthWithDisplayName) {
+				dispatch(setCurrenntUser(userAuthWithDisplayName));
+			} else if (user && !userAuthWithDisplayName) {
+				dispatch(setCurrenntUser(user));
+			} else {
+				dispatch(setCurrenntUser(null));
+			}
+		});
+
+		return unsubscribe;
+	}, [dispatch]);
 
 	return (
 		<Routes>
