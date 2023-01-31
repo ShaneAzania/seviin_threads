@@ -21,7 +21,7 @@ function Nav({ links }) {
 	// const { currenntUser } = useContext(UserContext);
 	const { isCartOpen, set_isCartOpen } = useContext(CartContext);
 
-	const currenntUser = useSelector((state) => state.user.currenntUser);
+	const { currenntUser } = useSelector((state) => state.user);
 
 	// var userWithDisplayName;
 
