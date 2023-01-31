@@ -1,6 +1,7 @@
+// react
 import { createContext, useEffect, useReducer } from "react";
-import {} from "../utils/firebase/firebase.utils";
 
+// firebase
 import { getCategoriesAndDocuments } from "../utils/firebase/firebase.utils";
 
 // the actual value you want to access
