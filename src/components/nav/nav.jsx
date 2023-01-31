@@ -1,20 +1,27 @@
 import { LogoContainer, Navigation, NavLinks, NavLinksContainer } from "./nav.styles.jsx";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
+
+// react
 import { Outlet } from "react-router-dom";
 import { Fragment } from "react";
+// redux
+import { useSelector } from "react-redux";
 
 import { signOutUser /*, getUserDisplayNameFromeFireStore */ } from "../../utils/firebase/firebase.utils";
 
+// context
 import { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
-import { UserContext } from "../../contexts/user.context";
+// import { UserContext } from "../../contexts/user.context";
 
 import CartIcon from "../cart-icon/cart-icon";
 import CartDropdown from "../cart-dropdown/cart-dropdown";
 
 function Nav({ links }) {
-	const { currenntUser } = useContext(UserContext);
+	// const { currenntUser } = useContext(UserContext);
 	const { isCartOpen, set_isCartOpen } = useContext(CartContext);
+
+	const currenntUser = useSelector((state) => state.user.currenntUser);
 
 	// var userWithDisplayName;
 
