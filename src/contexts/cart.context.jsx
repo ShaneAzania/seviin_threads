@@ -28,7 +28,7 @@ const cartReducer = (state, action) => {
 		case CART_ACTION_TYPES.SET_IS_CART_OPEN:
 			return {
 				...state,
-				isCartOpen: payload,
+				isCartOpen: !state.isCartOpen,
 			};
 		case CART_ACTION_TYPES.SET_CART_ITEMS:
 			return {
