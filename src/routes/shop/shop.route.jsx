@@ -1,17 +1,23 @@
 import "./shop.route.scss";
 
+// react
 import { Fragment } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import { useContext } from "react";
-import { CategoriesContext } from "../../contexts/categories.context";
+//redux
+import { useSelector } from "react-redux";
+
+//context
+// import { useContext } from "react";
+// import { CategoriesContext } from "../../contexts/categories.context";
 
 import ProductCard from "../../components/product-card/productCard";
 
 // import SHOP_DATA from "../../data/shop-data.json";
 
 function Shop() {
-	const { categories } = useContext(CategoriesContext),
+	const // { categories } = useContext(CategoriesContext),
+		{ categories } = useSelector((state) => state.categories),
 		{ categoryTitle } = useParams();
 
 	return (
@@ -21,11 +27,7 @@ function Shop() {
 					? categories.map((category) => (
 							<div key={category.title} className="row mb-5">
 								<h2 className="col-12 pb-3">
-									<Link
-										to={"/shop/" + category.title.toLowerCase()}
-									>
-										{category.title}
-									</Link>
+									<Link to={"/shop/" + category.title.toLowerCase()}>{category.title}</Link>
 								</h2>
 								<div className="products-container row">
 									{category.items

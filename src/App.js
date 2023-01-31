@@ -3,7 +3,11 @@ import "./App.scss";
 import "bootstrap";
 
 // fire base
-import { onAuthStateChangedListener, getUserDisplayNameFromeFireStore } from "./utils/firebase/firebase.utils";
+import {
+	onAuthStateChangedListener,
+	getUserDisplayNameFromeFireStore,
+	getCategoriesAndDocuments,
+} from "./utils/firebase/firebase.utils";
 
 // react
 import { Routes, Route /*, useLocation*/ } from "react-router-dom";
@@ -12,6 +16,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 //redux actions
 import { setCurrenntUser } from "./redux-store/user/user.action";
+import { set_categories } from "./redux-store/categories/categories.action";
 
 // componenets
 import Nav from "./components/nav/nav";
@@ -47,6 +52,7 @@ function App() {
 	//redux dispatch
 	const dispatch = useDispatch();
 
+	// set current user
 	useEffect(() => {
 		const unsubscribe = onAuthStateChangedListener(async (user) => {
 			//try to get display name into current user before setCurrentUser
@@ -67,6 +73,15 @@ function App() {
 		});
 
 		return unsubscribe;
+	}, [dispatch]);
+
+	// get categories and store items
+	useEffect(() => {
+		const getCategoriesMap = async () => {
+			const categoriesMap = await getCategoriesAndDocuments("categories");
+			dispatch(set_categories(categoriesMap));
+		};
+		getCategoriesMap();
 	}, [dispatch]);
 
 	return (
