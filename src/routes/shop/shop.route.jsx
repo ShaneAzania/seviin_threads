@@ -24,7 +24,8 @@ function Shop() {
 		<Fragment>
 			<div className="categories-container container-fluid">
 				{!categoryTitle
-					? categories.map((category) => (
+					? // general shop page
+					  categories.map((category) => (
 							<div key={category.title} className="row mb-5">
 								<h2 className="col-12 pb-3">
 									<Link to={"/shop/" + category.title.toLowerCase()}>{category.title}</Link>
@@ -38,7 +39,8 @@ function Shop() {
 								</div>
 							</div>
 					  ))
-					: categories
+					: // category specific shop page
+					  categories
 							.filter((category) => category.title.toLowerCase() === categoryTitle.toLowerCase())
 							.map((category) => (
 								<div key={category.title} className="row mb-5">
