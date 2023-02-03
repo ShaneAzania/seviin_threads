@@ -7,6 +7,9 @@ import { Fragment } from "react";
 // redux
 import { useSelector } from "react-redux";
 
+import { user_selector } from "../../redux-store/user/user.selector.js";
+
+// firebase
 import { signOutUser /*, getUserDisplayNameFromeFireStore */ } from "../../utils/firebase/firebase.utils";
 
 // context
@@ -21,7 +24,7 @@ function Nav({ links }) {
 	// const { currenntUser } = useContext(UserContext);
 	const { isCartOpen, set_isCartOpen } = useContext(CartContext);
 
-	const { currenntUser } = useSelector((state) => state.user);
+	const { currenntUser } = useSelector(user_selector);
 
 	// var userWithDisplayName;
 

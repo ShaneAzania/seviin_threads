@@ -7,6 +7,8 @@ import { Link, useParams } from "react-router-dom";
 //redux
 import { useSelector } from "react-redux";
 
+import { categories_selector } from "../../redux-store/categories/categories.selector";
+
 //context
 // import { useContext } from "react";
 // import { CategoriesContext } from "../../contexts/categories.context";
@@ -17,7 +19,7 @@ import ProductCard from "../../components/product-card/productCard";
 
 function Shop() {
 	const // { categories } = useContext(CategoriesContext),
-		{ categories } = useSelector((state) => state.categories),
+		{ categories } = useSelector(categories_selector),
 		{ categoryTitle } = useParams();
 
 	return (
