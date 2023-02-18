@@ -7,12 +7,25 @@ import {
 	RemoveCartItem,
 } from "./cart-item.styles";
 
-import { useContext } from "react";
-import { CartContext } from "../../contexts/cart.context";
+//redux
+import { useSelector, useDispatch } from "react-redux";
+// redux actions
+import { addItemToCart, subtractItemFromCart, deleteFromCart } from "../../redux-store/cart/cart.action";
+//redux selector
+import { cart_selector } from "../../redux-store/cart/cart.selector";
+
+// context
+// import { useContext } from "react";
+// import { CartContext } from "../../contexts/cart.context";
 
 const CartItem = ({ onClick, children, cartItem }) => {
-	const { name, imageUrl, price, quantity } = cartItem,
-		{ addItemToCart, subtractItemFromCart, deleteFromCart } = useContext(CartContext);
+	const { name, imageUrl, price, quantity } = cartItem;
+
+	// redux state
+	const { cartItems } = useSelector(cart_selector);
+	//dispatch
+	const dispatch = useDispatch();
+
 	return (
 		<CartItemContainer onClick={onClick}>
 			<CartItemImage style={{ backgroundImage: `url(${imageUrl})` }}></CartItemImage>
@@ -22,13 +35,15 @@ const CartItem = ({ onClick, children, cartItem }) => {
 					<span className="cart-item-price">${price}</span>
 				</div>
 				<div className="changeQuantity">
-					<IncreaseDecreaseCartItem onClick={() => subtractItemFromCart(cartItem)}>
+					<IncreaseDecreaseCartItem onClick={() => dispatch(subtractItemFromCart(cartItem, cartItems))}>
 						{"< "}
 					</IncreaseDecreaseCartItem>
 					<span className="cart-item-quantity">{quantity}</span>
-					<IncreaseDecreaseCartItem onClick={() => addItemToCart(cartItem)}>{" >"}</IncreaseDecreaseCartItem>
+					<IncreaseDecreaseCartItem onClick={() => dispatch(addItemToCart(cartItem, cartItems))}>
+						{" >"}
+					</IncreaseDecreaseCartItem>
 				</div>
-				<RemoveCartItem onClick={() => deleteFromCart(cartItem)}>Remove</RemoveCartItem>
+				<RemoveCartItem onClick={() => dispatch(deleteFromCart(cartItem, cartItems))}>Remove</RemoveCartItem>
 			</CartItemsDetails>
 		</CartItemContainer>
 	);

@@ -5,16 +5,21 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { Outlet } from "react-router-dom";
 import { Fragment } from "react";
 // redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
+// redux actions
+import { set_isCartOpen } from "../../redux-store/cart/cart.action.js";
+
+// redux selectors
+import { cart_selector } from "../../redux-store/cart/cart.selector.js";
 import { user_selector } from "../../redux-store/user/user.selector.js";
 
 // firebase
 import { signOutUser /*, getUserDisplayNameFromeFireStore */ } from "../../utils/firebase/firebase.utils";
 
 // context
-import { useContext } from "react";
-import { CartContext } from "../../contexts/cart.context";
+// import { useContext } from "react";
+// import { CartContext } from "../../contexts/cart.context";
 // import { UserContext } from "../../contexts/user.context";
 
 import CartIcon from "../cart-icon/cart-icon";
@@ -22,9 +27,14 @@ import CartDropdown from "../cart-dropdown/cart-dropdown";
 
 function Nav({ links }) {
 	// const { currenntUser } = useContext(UserContext);
-	const { isCartOpen, set_isCartOpen } = useContext(CartContext);
+	// const { isCartOpen, set_isCartOpen } = useContext(CartContext);
 
+	// redux dispatch
+	const dispatch = useDispatch();
+
+	// redux select state
 	const { currenntUser } = useSelector(user_selector);
+	const { isCartOpen } = useSelector(cart_selector);
 
 	// var userWithDisplayName;
 
@@ -46,7 +56,7 @@ function Nav({ links }) {
 		await signOutUser();
 	};
 	const handleCartIconClick = (e) => {
-		set_isCartOpen(!isCartOpen);
+		dispatch(set_isCartOpen(!isCartOpen))
 	};
 
 	return (

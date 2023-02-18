@@ -52,6 +52,7 @@ const INITIAL_STATE = {
 export const CartProvider = ({ children }) => {
 	const [{ isCartOpen, cartItems, cartCount, cartTotal }, dispatch] = useReducer(cartReducer, INITIAL_STATE);
 
+	// values helper functions
 	const updateCartCountAndTotal = (theCartItems) => {
 		var countAccumulator = 0,
 			totalAccumulator = 0;
@@ -64,6 +65,7 @@ export const CartProvider = ({ children }) => {
 		return { totalAccumulator, countAccumulator };
 	};
 
+	// values
 	const set_isCartOpen = () => {
 			dispatch({ type: CART_ACTION_TYPES.SET_IS_CART_OPEN, payload: !isCartOpen });
 		},
