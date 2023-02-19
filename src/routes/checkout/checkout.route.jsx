@@ -3,11 +3,17 @@ import "./checkout.route.scss";
 import CheckoutItem from "../../components/checkout-item/checkout-item";
 // import PaymentForm from "../../components/payment-form/payment-form";
 
-import { useContext } from "react";
-import { CartContext } from "../../contexts/cart.context";
+// redux
+import { useSelector } from "react-redux";
+// redux selector
+import { cart_selector } from "../../redux-store/cart/cart.selector";
+
+// context
+// import { useContext } from "react";
+// import { CartContext } from "../../contexts/cart.context";
 
 function Checkout() {
-	const { cartItems, cartTotal } = useContext(CartContext);
+	const { cartItems, cartTotal } = useSelector(cart_selector);
 	return (
 		<div className="checkout-container container">
 			<table className="table">

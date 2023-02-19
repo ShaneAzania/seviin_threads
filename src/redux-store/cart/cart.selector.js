@@ -16,6 +16,6 @@ const updateCartCountAndTotal = (theCartItems) => {
 };
 
 export const cart_selector = createSelector([cart_reducer], (cart) => {
-	const countAndTotal = updateCartCountAndTotal(cart.cartItems);
-	return { ...cart, ...countAndTotal };
+	// const countAndTotal = updateCartCountAndTotal(cart.cartItems);
+	return { ...cart, ...updateCartCountAndTotal(cart.cartItems) };
 });
