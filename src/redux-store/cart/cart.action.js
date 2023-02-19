@@ -25,7 +25,7 @@ export const set_isCartOpen = (open_or_close) => {
 
 		return {
 			type: CART_ACTION_TYPES.SET_CART_ITEMS,
-			payload: { updatedCartItemsArray },
+			payload: updatedCartItemsArray,
 		};
 	},
 	subtractItemFromCart = (itemToSubtract, cartItems) => {
@@ -49,7 +49,7 @@ export const set_isCartOpen = (open_or_close) => {
 
 			return {
 				type: CART_ACTION_TYPES.SET_CART_ITEMS,
-				payload: { updatedCartItemsArray },
+				payload: updatedCartItemsArray,
 			};
 		}
 	},
@@ -58,6 +58,7 @@ export const set_isCartOpen = (open_or_close) => {
 
 		return {
 			type: CART_ACTION_TYPES.SET_CART_ITEMS,
-			payload: { updatedCartItemsArray },
+			payload: updatedCartItemsArray,
 		};
 	};
+ 

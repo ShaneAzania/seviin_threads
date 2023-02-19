@@ -16,7 +16,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
 		case CART_ACTION_TYPES.SET_CART_ITEMS:
 			return {
 				...state,
-				cartItems: payload.updatedCartItemsArray,
+				cartItems: payload,
 			};
 		default:
 			return state;
