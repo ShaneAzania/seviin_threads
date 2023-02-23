@@ -1,15 +1,19 @@
-import "./index.scss";
+import './index.scss';
 
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+// react
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 
-import { Provider } from "react-redux";
-import { store } from "./redux-store/store";
+// redux
+import { Provider } from 'react-redux';
+import { store, persistor } from './redux-store/store';
+// redux persist
+import { PersistGate } from 'redux-persist/integration/react';
 
-import reportWebVitals from "./reportWebVitals";
+import reportWebVitals from './reportWebVitals';
 
-import App from "./App";
+import App from './App';
 
 // import { stripePromise } from "./utils/stripe/stripe.utils";
 
@@ -17,14 +21,16 @@ import App from "./App";
 // import { CategoriesProvider } from "./contexts/categories.context";
 // import { UserProvider } from "./contexts/user.context";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-		<BrowserRouter>
-			<Provider store={store}>
-				<App />
-			</Provider>
-		</BrowserRouter>
+		<PersistGate persistor={persistor}>
+			<BrowserRouter>
+				<Provider store={store}>
+					<App />
+				</Provider>
+			</BrowserRouter>
+		</PersistGate>
 	</React.StrictMode>
 );
 
