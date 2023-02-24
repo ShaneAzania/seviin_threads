@@ -13,10 +13,15 @@ const persistConfig = {
 	},
 	persisted_reducer = persistReducer(persistConfig, rootReducer);
 
-	console.log(Boolean);
+console.log(Boolean);
 
 const allMiddlewares = [process.env.NODE_ENV !== 'production' && logger].filter(Boolean),
-	composeEnhancers = compose(applyMiddleware(...allMiddlewares));
+	composeEnhancer_for_dev_tools =
+		(process.env.NODE_ENV !== 'production' &&
+			window &&
+			window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+		compose,
+	composeEnhancers = composeEnhancer_for_dev_tools(applyMiddleware(...allMiddlewares));
 
 export const store = createStore(persisted_reducer, undefined, composeEnhancers);
 
