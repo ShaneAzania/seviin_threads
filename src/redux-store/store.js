@@ -15,6 +15,7 @@ const persistConfig = {
 
 console.log(Boolean);
 
+// dev tools enabler
 const allMiddlewares = [process.env.NODE_ENV !== 'production' && logger].filter(Boolean),
 	composeEnhancer_for_dev_tools =
 		(process.env.NODE_ENV !== 'production' &&

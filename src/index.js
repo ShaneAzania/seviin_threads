@@ -13,6 +13,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import reportWebVitals from './reportWebVitals';
 
+// components
 import App from './App';
 
 // import { stripePromise } from "./utils/stripe/stripe.utils";
